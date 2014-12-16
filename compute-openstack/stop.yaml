@@ -1,0 +1,5 @@
+---
+- name: openstack-service-stop
+  hosts: all
+  tasks:
+   - command: openstack-service stop 

@@ -1,0 +1,5 @@
+---
+- name: openstack-service-start
+  hosts: all
+  tasks:
+   - command: openstack-service start 

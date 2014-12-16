@@ -1,0 +1,9 @@
+---
+- name: plotnetcfg
+  hosts: all
+  tasks:
+   - name: install_iproute-devel
+     yum: name=iproute-devel state=latest
+   - yum: name=graphviz state=latest
+   - copy: src=plotnetcfg-0.1-1.el7.x86_64.rpm dest=/root/
+   - command: yum localinstall /root/plotnetcfg-0.1-1.el7.x86_64.rpm -y

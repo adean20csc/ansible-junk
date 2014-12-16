@@ -1,0 +1,8 @@
+---
+- name: disable_tso_checksum 
+  hosts: all
+  tasks:
+   - command: ethtool -K p4p1 rx off tx off
+   - command: ethtool -K p4p2 rx off tx off
+   - command: ethtool -K p4p1 tso off
+   - command: ethtool -K p4p2 tso off

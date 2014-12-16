@@ -1,0 +1,1 @@
+10.53.252.245 ansible_connection=ssh ansible_ssh_user=root

@@ -1,0 +1,5 @@
+---
+- name: splunk-start
+  hosts: all
+  tasks:
+   - command: /opt/splunkforwarder/bin/splunk start

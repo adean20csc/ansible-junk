@@ -1,0 +1,5 @@
+---
+- name: network-testing
+  hosts: all
+  tasks:
+   - command: /root/NETWORK-TESTING/network-testing.sh 

@@ -1,0 +1,5 @@
+---
+- name: run_sosreport
+  hosts: all
+  tasks:
+   - command: sosreport --ticket-number=01310443 --name=jcallen --tmp-dir=/tmp/LOGGING/ --batch

@@ -1,0 +1,46 @@
+---
+- name: hanlon_docker
+  hosts: all
+  tasks:
+   - name: ensure_docker-io_is_installed
+     yum: name=docker-io state=latest
+
+   - name: ensure python-docker-py is installed
+     yum: name=python-docker-py state=latest
+
+   - name: persistant_mongodb_directory
+     file: state=directory path=/opt/hanlon/data/db
+
+   - name: persistant_image_directory
+     file: state=directory path=/opt/hanlon/image
+
+   - name: download_mk
+     get_url: url="https://github.com/csc/Hanlon-Microkernel/releases/download/v2.0.0/hnl_mk_debug-image.2.0.0.iso" dest=/opt/hanlon/image
+
+   - name: ensure_mongo_container_run
+     docker: 
+       image: dockerfile/mongodb 
+       name: mongodb
+       volumes:
+         - /opt/hanlon/data/db:/data/db
+
+   - name: ensure_hanlon_container_run
+     docker: 
+       image: jcpowermac/hanlon 
+       ports: 8026:8026 
+       links: mongodb:mongo 
+       name: hanlon
+       env: DOCKER_HOST={{ ansible_eth0.ipv4.address }}
+       privileged: true
+       volumes: 
+         - /opt/hanlon/image:/home/hanlon/image
+
+   - pause: seconds=30
+
+   - name: ensure_atftpd_container_run
+     docker: 
+       image: jcpowermac/atftpd
+       ports: 69:69/udp
+       links: hanlon:hanlon
+       name: atftpd
+       env: DOCKER_HOST={{ ansible_eth0.ipv4.address }}

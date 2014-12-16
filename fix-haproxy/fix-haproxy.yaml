@@ -1,0 +1,10 @@
+---
+- name: fix_ha_proxy 
+  hosts: all
+  
+  tasks:
+   - name: "rabbit_clitcpka"
+     lineinfile: dest=/etc/haproxy/haproxy.cfg insertafter="^frontend vip-msg" line="   option clitcpka" backup=yes
+   
+   - name: "rabbit_srvtcpka"
+     lineinfile: dest=/etc/haproxy/haproxy.cfg insertafter="^backend msg" line="   option srvtcpka" backup=yes

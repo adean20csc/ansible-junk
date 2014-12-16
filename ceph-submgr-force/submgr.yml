@@ -1,0 +1,6 @@
+- name: ceph_nodes
+  hosts: all 
+  tasks:
+    - name: submgr_65
+      command: subscription-manager release --set=6.5
+

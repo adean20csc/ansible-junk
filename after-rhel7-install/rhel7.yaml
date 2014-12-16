@@ -1,0 +1,36 @@
+---
+- name: after_rhel7_os_install
+  hosts: all
+  vars:
+   proxy_env:
+    http_proxy: http://172.27.0.205:3128
+
+  tasks:
+   - name: yum_proxy
+     lineinfile: dest=/etc/yum.conf line="proxy=http://172.27.0.205:3128" backup=yes
+
+   - name: system_wide_proxy_http
+     lineinfile: dest=/etc/profile.d/proxy.sh line="export http_proxy=http://172.27.0.205:3128" backup=yes create=yes
+
+   - name: system_wide_proxy_ftp
+     lineinfile: dest=/etc/profile.d/proxy.sh line="export ftp_proxy=http://172.27.0.205:3128" backup=yes
+
+   - name: subscript_manage_config
+     command: subscription-manager config --server.proxy_hostname=172.27.0.205 --server.proxy_port=3128
+
+   - name: subscription_manage
+     command: subscription-manager register --username= --password=
+     ignore_errors: yes
+
+   - name: subscription_manage_attach
+     command: subscription-manager attach --auto
+     ignore_errors: yes
+
+   - name: upgrade_all_packages
+     yum: name=* state=latest
+
+   - name: install_perl
+     yum: name=perl state=latest
+
+   - name: install_wget
+     yum: name=wget state=latest
