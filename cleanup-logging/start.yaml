@@ -1,0 +1,5 @@
+---
+- name: cleanup_logging 
+  hosts: all
+  tasks:
+   - command: rm -f /tmp/LOGGING/*

@@ -1,0 +1,10 @@
+---
+- name: debug_kernel 
+  hosts: all
+  tasks:
+   - copy: src=kernel-3.10.0-123.9.3.el7.sfdc01310443/kernel-3.10.0-123.9.3.el7.sfdc01310443.x86_64.rpm dest=/root/
+   - copy: src=kernel-3.10.0-123.9.3.el7.sfdc01310443/kernel-devel-3.10.0-123.9.3.el7.sfdc01310443.x86_64.rpm dest=/root/
+   - copy: src=kernel-3.10.0-123.9.3.el7.sfdc01310443/kernel-headers-3.10.0-123.9.3.el7.sfdc01310443.x86_64.rpm dest=/root/
+   - command: yum localinstall /root/kernel-3.10.0-123.9.3.el7.sfdc01310443.x86_64.rpm -y
+   - command: yum localinstall /root/kernel-devel-3.10.0-123.9.3.el7.sfdc01310443.x86_64.rpm -y
+   - command: yum localinstall /root/kernel-headers-3.10.0-123.9.3.el7.sfdc01310443.x86_64.rpm -y

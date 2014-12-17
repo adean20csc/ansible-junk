@@ -1,0 +1,29 @@
+---
+- name: openstack_pkgs 
+  hosts: all
+  tasks:
+   - name: subscription_manage_attach
+     command: subscription-manager attach --pool=8a85f98147ed81210147ee77938f38ff 
+     ignore_errors: yes
+
+   - name: upgrade_all_packages
+     yum: name=* state=latest
+
+   - name: install_yum-plugin-priorities
+     yum: name=yum-plugin-priorities state=latest
+     ignore_errors: yes
+
+   - name: install_yum-utils
+     yum: name=yum-utils state=latest
+
+   - name: yum-config-manager
+     command: yum-config-manager --enable rhel-7-server-openstack-5.0-rpms --setopt="rhel-7-server-openstack-5.0-rpms.priority=1"
+     ignore_errors: yes
+
+   - name: upgrade_all_packages
+     yum: name=* state=latest
+
+   - lineinfile: dest=/etc/sysconfig/network-scripts/ifcfg-em1 line="NM_CONTROLLED=no" state=present backup=yes
+   - lineinfile: dest=/etc/sysconfig/network-scripts/ifcfg-em1 line="ONBOOT=yes" state=present backup=yes
+   - yum: name=openstack-packstack state=latest
+

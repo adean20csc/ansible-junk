@@ -26,6 +26,6 @@
    - lineinfile: dest=/etc/sysconfig/network-scripts/ifcfg-em1 line="NM_CONTROLLED=no" state=present backup=yes
    - lineinfile: dest=/etc/sysconfig/network-scripts/ifcfg-em1 line="ONBOOT=yes" state=present backup=yes
    - service: name=NetworkManager state=stopped enabled=no
-   - service: name=network state=stopped enabled=yes
+   - service: name=network state=start enabled=yes
    - yum: name=openstack-packstack state=latest
 

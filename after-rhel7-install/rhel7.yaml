@@ -19,7 +19,7 @@
      command: subscription-manager config --server.proxy_hostname=172.27.0.205 --server.proxy_port=3128
 
    - name: subscription_manage
-     command: subscription-manager register --username= --password=
+     command: subscription-manager register --username={{ username }} --password={{ password }}
      ignore_errors: yes
 
    - name: subscription_manage_attach

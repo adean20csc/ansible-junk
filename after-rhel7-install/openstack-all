@@ -1,0 +1,13 @@
+#172.16.22.23 ansible_connection=ssh ansible_ssh_user=root
+#172.16.22.24 ansible_connection=ssh ansible_ssh_user=root
+#172.16.22.25 ansible_connection=ssh ansible_ssh_user=root
+#172.16.22.26 ansible_connection=ssh ansible_ssh_user=root
+#172.16.22.27 ansible_connection=ssh ansible_ssh_user=root
+#172.16.22.28 ansible_connection=ssh ansible_ssh_user=root
+172.30.0.46 ansible_connection=ssh ansible_ssh_user=root
+172.30.0.47 ansible_connection=ssh ansible_ssh_user=root
+172.30.0.48 ansible_connection=ssh ansible_ssh_user=root
+
+
+
+
