@@ -1,5 +1,13 @@
 ---
-- name: openstack-service-start
+- name: disable_tso_checksum 
   hosts: all
   tasks:
-   - command: openstack-service start 
+   - command: ethtool -K p4p1 rx off tx off
+   - command: ethtool -K p4p2 rx off tx off
+   - command: ethtool -K p4p1 tso off
+   - command: ethtool -K p4p2 tso off
+   - command: ethtool -K p4p1 gro off
+   - command: ethtool -K p4p1 lro off
+   - command: ethtool -K p4p2 gro off
+   - command: ethtool -K p4p2 lro off
+
